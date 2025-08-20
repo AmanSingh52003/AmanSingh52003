@@ -1,10 +1,9 @@
 import telebot
 
 # Yaha apna NAYA API token paste karo
-API_TOKEN = "8401416867:AAETRLbAV3hqTYhEtXhPuAdQuumYaznfyQA"
+API_TOKEN = ""
 
-bot = telebot.TeleBot(8401416867:AAETRLbAV3hqTYhEtXhPuAdQuumYaznfyQA)
-
+bot = telebot.TeleBot
 # 60 din ka sample learning plan
 lessons = {
     1: "Day 1 📝: Learn basic greetings (Hello, How are you?) and write 5 sentences about yourself.",
