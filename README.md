@@ -1,12 +1,43 @@
-- 👋 Hi, I’m @AmanSingh52003
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+import telebot
 
-<!---
-AmanSingh52003/AmanSingh52003 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+# Yaha apna NAYA API token paste karo
+API_TOKEN = "8401416867:AAETRLbAV3hqTYhEtXhPuAdQuumYaznfyQA"
+
+bot = telebot.TeleBot(8401416867:AAETRLbAV3hqTYhEtXhPuAdQuumYaznfyQA)
+
+# 60 din ka sample learning plan
+lessons = {
+    1: "Day 1 📝: Learn basic greetings (Hello, How are you?) and write 5 sentences about yourself.",
+    2: "Day 2 📝: Learn Present tense (I am, You are) and write 5 sentences.",
+    3: "Day 3 📝: Learn 10 new vocabulary words and use them in sentences.",
+    4: "Day 4 📝: Practice writing 10 questions using 'Do you... ?'",
+    5: "Day 5 📝: Learn Past tense (I went, I played) and write 5 sentences.",
+    # ... baaki 60 din ka plan add karna hoga
+}
+
+# Progress track karne ke liye
+user_progress = {}
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Hi 👩‍🏫💕! I am your English Teacher GF. Let's start learning English for 60 days!")
+    user_progress[message.chat.id] = 1
+    bot.send_message(message.chat.id, lessons[1])
+
+@bot.message_handler(func=lambda msg: True)
+def learn_english(message):
+    user_id = message.chat.id
+    day = user_progress.get(user_id, 1)
+
+    # Simple feedback
+    bot.reply_to(message, f"Good try ❤️! I'll help you improve.\n✅ Feedback: Try writing in full sentences.")
+
+    # Next lesson
+    if day < len(lessons):
+        user_progress[user_id] = day + 1
+        bot.send_message(user_id, lessons[day + 1])
+    else:
+        bot.send_message(user_id, "🎉 Congrats! You completed 60 days of English learning!")
+
+print("🤖 Bot is running...")
+bot.infinity_polling()
